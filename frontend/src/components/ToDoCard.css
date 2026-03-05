@@ -1,0 +1,62 @@
+.tarefa-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px 20px;
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f0f0f0;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarefa-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.tarefa-detalhes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  padding: 1rem 5rem 1rem 1rem;
+}
+
+.tarefa-detalhes h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937; /* cinza escuro elegante */
+}
+
+.tarefa-detalhes p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #6b7280; /* cinza mais leve */
+}
+
+.concluir-btn {
+  background: #10b981; /* verde moderno */
+  color: #ffffff;
+
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.concluir-btn:hover {
+  background: #059669;
+}
+
+.concluir-btn:active {
+  transform: scale(0.96);
+}
