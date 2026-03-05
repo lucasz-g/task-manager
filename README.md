@@ -5,6 +5,8 @@ The project demonstrates a clean and minimal full-stack integration: a Java REST
 
 Users can create and list tasks, and **mark them as completed**. In this project, **completing a task removes it from the list** by triggering a `DELETE` request to the backend and then updating the React state locally.
 
+The project comes with initial data via Flyway. To reset the demo environment, delete the database file in `todo/data/` and restart the backend.
+
 ---
 
 # Tech Stack
