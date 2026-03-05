@@ -205,8 +205,17 @@ http://localhost:5173
 
 # Database
 
-The project uses an **H2 in-memory database** for simplicity.
-Flyway manages database schema migrations.
+The project uses an **H2 file-based database** for simplicity.
+
+The database is created automatically on the first run at:
+
+todo/data/todo-db
+
+Flyway is used to manage database schema migrations and initial seed data.
+
+## Resetting the database (development)
+
+To reset the local database, delete the `data/` folder inside the backend project and restart the application. Flyway will recreate the schema and seed data automatically.
 
 ---
 
