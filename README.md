@@ -224,5 +224,7 @@ Possible next steps for this project:
 # Author
 
 Lucas Garcia
+
 Software Engineering Student
+
 Backend • Data Systems • AI Applications
