@@ -1,18 +1,9 @@
 # Task Manager
 
-A simple **full-stack task management application** built with **React** on the frontend and **Spring Boot** on the backend.
-The project demonstrates how to build and integrate a modern Java REST API with a React interface using a clean and minimal architecture.
+A simple **full-stack task management application** built with **React** (frontend) and **Spring Boot** (backend).
+The project demonstrates a clean and minimal full-stack integration: a Java REST API consumed by a React interface using Axios.
 
-The application allows users to create, list and delete tasks through a RESTful API consumed by a React frontend.
-
-This project was developed as a portfolio example to demonstrate practical skills in:
-
-* REST API development with Spring Boot
-* Database persistence with JPA
-* Frontend integration with React
-* HTTP communication using Axios
-
-Modern applications commonly combine a Java backend (Spring) with a JavaScript frontend like React to create modular full-stack systems. ([InfoWorld][1])
+Users can create and list tasks, and **mark them as completed**. In this project, **completing a task removes it from the list** by triggering a `DELETE` request to the backend and then updating the React state locally.
 
 ---
 
@@ -43,9 +34,12 @@ Modern applications commonly combine a Java backend (Spring) with a JavaScript f
 
 * Create tasks
 * List tasks
-* Delete tasks
-* Task validation on backend
-* REST API integration with React
+* **Complete tasks (implemented as delete)**
+
+  * When a user completes a task, the frontend calls the backend `DELETE` endpoint
+  * The task is then removed from the UI state (`setTarefas(filter...)`)
+* Task validation on backend (Jakarta Validation)
+* REST API integration with React (Axios)
 * Database schema migration with Flyway
 
 ---
@@ -54,7 +48,7 @@ Modern applications commonly combine a Java backend (Spring) with a JavaScript f
 
 The project follows a simple layered architecture:
 
-```
+```text
 React Frontend
       │
       │ HTTP (Axios)
@@ -66,13 +60,11 @@ Spring Boot REST API
 H2 Database
 ```
 
-The backend exposes REST endpoints which are consumed by the React application.
-
 ---
 
 # Project Structure
 
-```
+```text
 task-manager
 │
 ├── frontend
@@ -102,19 +94,19 @@ task-manager
 
 Base URL:
 
-```
+```text
 /api/v1/tarefas
 ```
 
 ### Get all tasks
 
-```
+```text
 GET /api/v1/tarefas
 ```
 
-Response
+Response:
 
-```
+```json
 [
   {
     "id": 1,
@@ -129,13 +121,13 @@ Response
 
 ### Create task
 
-```
+```text
 POST /api/v1/tarefas
 ```
 
-Body
+Body:
 
-```
+```json
 {
   "tarefa": "Learn React",
   "descricao": "Build a simple UI",
@@ -145,10 +137,19 @@ Body
 
 ---
 
-### Delete task
+### Complete task (delete)
 
-```
+```text
 DELETE /api/v1/tarefas/{id}
+```
+
+**Frontend behavior:** completing a task triggers this delete call and then removes the task from the UI state:
+
+```js
+async function concludeTask(id) {
+  await api.delete(`/api/v1/tarefas/${id}`);
+  setTarefas(prev => prev.filter(tarefa => tarefa.id !== id));
+}
 ```
 
 ---
@@ -157,21 +158,21 @@ DELETE /api/v1/tarefas/{id}
 
 ## Backend
 
-Requirements
+Requirements:
 
 * Java 17
 * Maven
 
 Run:
 
-```
+```bash
 cd todo
 mvn spring-boot:run
 ```
 
 Backend runs at:
 
-```
+```text
 http://localhost:8080
 ```
 
@@ -179,14 +180,14 @@ http://localhost:8080
 
 ## Frontend
 
-Requirements
+Requirements:
 
 * Node.js
 * npm
 
 Run:
 
-```
+```bash
 cd frontend
 npm install
 npm run dev
@@ -194,7 +195,7 @@ npm run dev
 
 Frontend runs at:
 
-```
+```text
 http://localhost:5173
 ```
 
@@ -203,17 +204,16 @@ http://localhost:5173
 # Database
 
 The project uses an **H2 in-memory database** for simplicity.
-
-Flyway is used to manage database schema migrations.
+Flyway manages database schema migrations.
 
 ---
 
 # Future Improvements
 
-Possible next steps for this project:
+Possible next steps:
 
 * Update tasks
-* Mark tasks as completed
+* Mark tasks as completed without deleting (persist `concluido = true`)
 * Pagination
 * Authentication (Spring Security + JWT)
 * Deploy frontend (Vercel)
@@ -224,7 +224,5 @@ Possible next steps for this project:
 # Author
 
 Lucas Garcia
-
 Software Engineering Student
-
 Backend • Data Systems • AI Applications
